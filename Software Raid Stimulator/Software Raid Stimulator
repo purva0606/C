@@ -1,1 +1,10 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX 5
+#define SIZE 100
+
+int raid, disks;
+int failed[MAX] = {0};
+char data[MAX][SIZE][50];
