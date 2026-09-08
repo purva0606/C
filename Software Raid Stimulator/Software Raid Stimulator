@@ -8,3 +8,4 @@
 int raid, disks;
 int failed[MAX] = {0};
 char data[MAX][SIZE][50];
+int
