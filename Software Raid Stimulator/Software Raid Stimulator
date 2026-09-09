@@ -8,4 +8,16 @@
 int raid, disks;
 int failed[MAX] = {0};
 char data[MAX][SIZE][50];
-int
+void writeData(int block, char text[]) {
+    int d, b;
+
+    if (raid == 0) {
+        d = block % disks;
+        b = block / disks;
+
+        if (failed[d])
+            printf("Disk failed! Data cannot be written.\n");
+        else
+            strcpy(data[d][b], text);
+    }
+
