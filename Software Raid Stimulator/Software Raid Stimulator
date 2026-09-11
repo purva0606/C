@@ -20,4 +20,22 @@ void writeData(int block, char text[]) {
         else
             strcpy(data[d][b], text);
     }
+ else if (raid == 1) {
+        for (d = 0; d < disks; d++)
+            if (!failed[d])
+                strcpy(data[d][block], text);
+
+        printf("Data written using mirroring.\n");
+    }
+
+    else if (raid == 5) {
+        d = block % (disks - 1);
+        b = block / (disks - 1);
+
+        if (!failed[d])
+            strcpy(data[d][b], text);
+
+        printf("Data written using RAID 5.\n");
+    }
+}
 
