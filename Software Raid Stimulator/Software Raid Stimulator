@@ -38,4 +38,38 @@ void writeData(int block, char text[]) {
         printf("Data written using RAID 5.\n");
     }
 }
+* Read data */
+void readData(int block) {
+    int d, b;
+
+    if (raid == 0) {
+        d = block % disks;
+        b = block / disks;
+
+        if (failed[d])
+            printf("Data lost because disk failed.\n");
+        else
+            printf("Data: %s\n", data[d][b]);
+    }
+
+    else if (raid == 1) {
+        for (d = 0; d < disks; d++) {
+            if (!failed[d]) {
+                printf("Data: %s\n", data[d][block]);
+                return;
+            }
+        }
+        printf("All disks failed.\n");
+    }
+
+    else {
+        d = block % (disks - 1);
+        b = block / (disks - 1);
+
+        if (!failed[d])
+            printf("Data: %s\n", data[d][b]);
+        else
+            printf("Disk failed. Data recovered using parity.\n");
+    }
+}
 
