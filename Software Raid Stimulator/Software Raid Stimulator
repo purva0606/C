@@ -72,4 +72,74 @@ void readData(int block) {
             printf("Disk failed. Data recovered using parity.\n");
     }
 }
+/* Show status */
+void status() {
+    int i;
 
+    printf("\nRAID Level: %d\n", raid);
+
+    for (i = 0; i < disks; i++)
+        printf("Disk %d: %s\n", i,
+               failed[i] ? "FAILED" : "Healthy");
+}
+
+int main() {
+    int choice, block, disk;
+
+    printf("Enter RAID level (0, 1 or 5): ");
+    scanf("%d", &raid);
+
+    printf("Enter number of disks: ");
+    scanf("%d", &disks);
+
+    while (1) {
+        printf("\n1. Write\n");
+        printf("2. Read\n");
+        printf("3. Fail Disk\n");
+        printf("4. Status\n");
+        printf("5. Exit\n");
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+
+        if (choice == 1) {
+            char text[50];
+
+            printf("Enter block number: ");
+            scanf("%d", &block);
+
+            printf("Enter data: ");
+            scanf("%s", text);
+
+            writeData(block, text);
+        }
+
+        else if (choice == 2) {
+            printf("Enter block number: ");
+            scanf("%d", &block);
+
+            readData(block);
+        }
+
+        else if (choice == 3) {
+            printf("Enter disk number: ");
+            scanf("%d", &disk);
+
+            failed[disk] = 1;
+            printf("Disk %d failed.\n", disk);
+        }
+
+        else if (choice == 4) {
+            status();
+        }
+
+        else if (choice == 5) {
+            break;
+        }
+
+        else {
+            printf("Invalid choice!\n");
+        }
+    }
+
+    return 0;
+}
