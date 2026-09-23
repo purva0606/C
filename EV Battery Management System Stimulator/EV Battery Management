@@ -1,2 +1,13 @@
-import stdio.h
-import
+#include <stdio.h>
+
+int main()
+{
+    float voltage, current, temperature, soc;
+
+    printf("===== EV BATTERY MANAGEMENT SYSTEM =====\n");
+
+    printf("Enter Battery Voltage (V): ");
+    scanf("%f", &voltage);
+
+    printf("Enter Battery Current (A): ");
+    scanf("%f", &current);
