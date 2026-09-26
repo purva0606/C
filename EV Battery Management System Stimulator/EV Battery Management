@@ -22,4 +22,31 @@ printf("Enter Battery Temperature (C): ");
     printf("Current     : %.2f A\n", current);
     printf("Temperature : %.2f C\n", temperature);
     printf("SOC         : %.2f %%\n", soc);
+ /* Voltage protection */
+    if (voltage > 4.2)
+        printf("WARNING: Over Voltage!\n");
+    else if (voltage < 3.0)
+        printf("WARNING: Under Voltage!\n");
+    else
+        printf("Voltage: NORMAL\n");
+
+    /* Current protection */
+    if (current > 20)
+        printf("WARNING: Over Current!\n");
+    else
+        printf("Current: NORMAL\n");
+
+    /* Temperature protection */
+    if (temperature > 45)
+        printf("WARNING: High Temperature!\n");
+    else
+        printf("Temperature: NORMAL\n");
+
+    /* SOC status */
+    if (soc >= 80)
+        printf("Battery Level: HIGH\n");
+    else if (soc >= 30)
+        printf("Battery Level: MEDIUM\n");
+    else
+        printf("Battery Level: LOW - Charge Required\n");
 
